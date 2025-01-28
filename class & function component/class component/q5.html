@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light/Dark Mode Toggle</title>
+    <style>
+        .light-mode {
+            background-color: white;
+            color: black;
+        }
+
+        .dark-mode {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="light-mode">
+    <div id="toggleApp"></div>
+    <script>
+        class ThemeToggle {
+            isDarkMode = false;
+
+            render() {
+                const appContainer = document.getElementById('toggleApp');
+                appContainer.innerHTML = `
+                <div class="toggle-container">
+                    <h1>Toggle Light/Dark Mode</h1>
+                    <button id="toggleButton">Switch to Dark Mode</button>
+                </div>
+            `;
+
+                document.getElementById('toggleButton').addEventListener('click', () => this.toggleTheme());
+            }
+
+            toggleTheme() {
+                this.isDarkMode = !this.isDarkMode;
+
+                document.body.className = this.isDarkMode ? 'dark-mode' : 'light-mode';
+
+                const buttonText = this.isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+                document.getElementById('toggleButton').textContent = buttonText;
+            }
+        }
+
+        const themeToggleApp = new ThemeToggle();
+        themeToggleApp.render();
+    </script>
+</body>
+
+</html>

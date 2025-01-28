@@ -1,0 +1,86 @@
+<!-- 1.	Product Search (Dynamic Search):
+○	Problem: Create a class component that displays a list of products and allows the user to search for products by name.
+○	Real-Life Example: You’re building a small product listing page where users can search for items like "Shirt" or "Pants" from a predefined list. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Search</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 0;
+    }
+    #product-list {
+      margin-top: 20px;
+    }
+    .product {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Product Search</h1>
+  <input type="text" id="search-input" placeholder="Search for products..." />
+  <button id="search-button">Search</button>
+
+  <div id="product-list">
+    <h3>Available Products:</h3>
+    <ul id="products">
+      
+    </ul>
+  </div>
+
+  <script>
+    class ProductSearch {
+      constructor(products) {
+        this.products = products;
+        this.filteredProducts = products;
+        this.productListElement = document.getElementById("products");
+      }
+
+      
+      displayProducts() {
+        this.productListElement.innerHTML = ""; 
+        if (this.filteredProducts.length > 0) {
+          this.filteredProducts.forEach((product) => {
+            const productElement = document.createElement("li");
+            productElement.className = "product";
+            productElement.textContent = product;
+            this.productListElement.appendChild(productElement);
+          });
+        } else {
+          this.productListElement.innerHTML = "<li>No products found.</li>";
+        }
+      }
+
+      
+      search(query) {
+        this.filteredProducts = this.products.filter((product) =>
+          product.toLowerCase().includes(query.toLowerCase())
+        );
+        this.displayProducts();
+      }
+    }
+    
+    const products = ["Shirt", "Pants", "Shoes", "Hat", "Socks", "Jacket"];
+  
+    const productSearch = new ProductSearch(products);
+
+    productSearch.displayProducts();
+
+    document.getElementById("search-button").addEventListener("click", () => {
+      const query = document.getElementById("search-input").value;
+      productSearch.search(query);
+    });
+
+    document.getElementById("search-input").addEventListener("input", () => {
+      const query = document.getElementById("search-input").value;
+      productSearch.search(query);
+    });
+  </script>
+</body>
+</html>

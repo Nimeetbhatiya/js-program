@@ -1,0 +1,35 @@
+<!-- 2.	Simple Toggle (Button State):
+○	Problem: Create a button that toggles its text between "ON" and "OFF" when clicked.
+○	Real-Life Example: A button that changes its label between "Start" and "Stop" depending on the state. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toggle Button</title>
+  <style>
+    button {
+      font-size: 16px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <button id="toggle-button">OFF</button>
+  <p id="message">The Button is currently Off </p>
+
+  <script>
+    
+    const toggleButton = document.getElementById("toggle-button");
+    const message = document.getElementById("message")
+    let isOn = false;
+    toggleButton.addEventListener("click", () => {
+      isOn = !isOn; 
+      toggleButton.textContent = isOn ? "ON" : "OFF"; 
+      message.textContent = isOn ? "The Button is On" : "The Button is Off " ;
+    });
+  </script>
+</body>
+</html>

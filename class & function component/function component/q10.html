@@ -1,0 +1,43 @@
+<!-- 5.	Change Text Color (Button Click Event):
+○	Problem: Create a button that changes the text color of a paragraph when clicked.
+○	Real-Life Example: A simple app where a button click changes the color of a text from black to red, blue, or green. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Text Color</title>
+    <style>
+        p {
+            font-size: 18px;
+        }
+
+        button {
+            font-size: 16px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <p id="text">Click the button to change color!</p>
+    <button id="color-button">Change Color</button>
+
+    <script>
+        const text = document.getElementById("text");
+        const button = document.getElementById("color-button");
+
+        const colors = ["red", "blue", "green", "purple", "orange"];
+        let currentColorIndex = 0;
+
+        button.addEventListener("click", () => {
+            text.style.color = colors[currentColorIndex];
+            currentColorIndex = (currentColorIndex + 1) % colors.length;
+        });
+    </script>
+</body>
+
+</html>

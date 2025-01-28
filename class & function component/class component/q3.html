@@ -1,0 +1,78 @@
+<!-- 3.	Todo List (Add/Remove Items):
+○	Problem: Create a todo list where the user can add and remove tasks.
+○	Real-Life Example: A simple task manager where users can add tasks like "Buy groceries" and remove them once completed. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>    
+
+</head>
+
+<body>
+
+    <div id="todoApp"></div>
+
+    <script>
+        class TodoList {
+            taskList = [];
+
+            render() {
+                const appContainer = document.getElementById('todoApp');
+                appContainer.innerHTML = `
+            <div class="todo-container">
+                <h1>Todo List</h1>
+                <input type="text" id="taskInput" placeholder="Add a new task...">
+                <button id="addTaskButton">Add Task</button>
+                <ul id="taskList"></ul>
+            </div>  `;
+
+                document.getElementById('addTaskButton').addEventListener('click', () => this.addTask());
+                this.updateTaskList();
+            }
+
+            addTask() {
+                const taskInput = document.getElementById('taskInput');
+                const taskText = taskInput.value.trim();
+
+                if (taskText) {
+                    this.taskList.push(taskText);
+                    taskInput.value = '';
+                    this.updateTaskList();
+                }
+                taskInput.focus();
+            }
+
+            removeTask(index) {
+                this.taskList.splice(index, 1);
+                this.updateTaskList();
+            }
+
+            updateTaskList() {
+                const taskListElement = document.getElementById('taskList');
+                taskListElement.innerHTML = '';
+
+                this.taskList.forEach((task, index) => {
+                    const li = document.createElement('li');
+                    li.textContent = task;
+
+                    const removeButton = document.createElement('button');
+                    removeButton.textContent = 'Remove';
+                    removeButton.className = 'remove-button';
+                    removeButton.addEventListener('click', () => this.removeTask(index));
+
+                    li.appendChild(removeButton);
+                    taskListElement.appendChild(li);
+                });
+            }
+        }
+
+        const todoApp = new TodoList();
+        todoApp.render();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="counterApp"></div>
+    
+    <script>
+        class Counter {
+    count = 0; 
+
+    render() {
+        const appContainer = document.getElementById('counterApp');
+        appContainer.innerHTML = `
+            <div class="counter-container">
+                <h1>Item Count: <span id="count">${this.count}</span></h1>
+                <button id="decrement">-</button>
+                <button id="increment">+</button>
+            </div>
+        `;
+
+        document.getElementById('increment').addEventListener('click', () => this.increment());
+        document.getElementById('decrement').addEventListener('click', () => this.decrement());
+    }
+
+    increment() {
+        this.count++; 
+        this.updateDisplay();
+    }
+
+    decrement() {
+        if (this.count > 0) { 
+            this.count--; 
+            this.updateDisplay(); 
+        }
+    }
+
+    updateDisplay() {
+        const countDisplay = document.getElementById('count');
+        countDisplay.textContent = this.count;
+    }
+}
+
+const counterApp = new Counter();
+counterApp.render();
+    </script>
+</body>
+</html>

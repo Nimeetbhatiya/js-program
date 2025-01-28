@@ -1,0 +1,72 @@
+
+<!-- 2.	Simple Login Form (Form Validation):
+○	Problem: Create a login form with email and password fields, and validate the email format before allowing submission.
+○	Real-Life Example: You’re making a login page where users must enter a valid email address and password to log in.
+○	Solution: On form submission, validate that the email has an "@" symbol and the password is at least 6 characters long. Show an error message if the validation fails. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>loginApp</title>
+</head>
+<body>
+    <div id="loginApp"></div>
+
+    <script>
+        class LoginForm {
+    email = '';
+    password = '';
+    errorMessage = '';
+
+    render() {
+        const appContainer = document.getElementById('loginApp');
+        appContainer.innerHTML = `
+            <div class="login-container">
+                <h2>Login</h2>
+                <input type="text" id="email" placeholder="Email" />
+                <input type="password" id="password" placeholder="Password" />
+                <button id="submitBtn">Login</button>
+                <div class="error" id="errorMessage">${this.errorMessage}</div>
+            </div>
+        `;
+
+        document.getElementById('submitBtn').addEventListener('click', () => this.validateForm());
+        document.getElementById('email').addEventListener('input', (e) => this.email = e.target.value);
+        document.getElementById('password').addEventListener('input', (e) => this.password = e.target.value);
+    }
+
+    validateForm() {
+        this.errorMessage = '';
+        const emailValid = this.validateEmail(this.email);
+        const passwordValid = this.validatePassword(this.password);
+
+        if (!emailValid) {
+            this.errorMessage += 'Invalid email format. ';
+        }
+        if (!passwordValid) {
+            this.errorMessage += 'Password must be at least 6 characters long.';
+        }
+
+        document.getElementById('errorMessage').textContent = this.errorMessage;
+
+        if (emailValid && passwordValid) {
+            alert('Login successful!');
+        }
+    }
+
+    validateEmail(email) {
+        return email.includes('@');
+    }
+
+    validatePassword(password) {
+        return password.length >= 6; 
+    }
+}
+
+const loginForm = new LoginForm();
+loginForm.render();
+    </script>
+</body>
+</html>
